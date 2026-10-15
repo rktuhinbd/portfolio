@@ -604,7 +604,7 @@ function Portfolio() {
       </a>
       <header className="header">
         <a className="brand" href="#hero" aria-label={t("Rejaul Karim home")}>
-          {t("rk")}
+          rk
           <span>.</span>
         </a>
         <nav aria-label={t("Primary")} className={menu ? "nav open" : "nav"}>

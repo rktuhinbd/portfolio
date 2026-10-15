@@ -95,6 +95,8 @@ describe("portfolio interactions", () => {
   });
   it("switches all major sections and forms to Bengali and persists the choice", () => {
     render(<App />);
+    const brand = screen.getByRole("link", { name: "Rejaul Karim home" });
+    expect(brand).toHaveTextContent("rk.");
     fireEvent.click(screen.getByRole("button", { name: "Switch to Bengali" }));
     expect(document.documentElement.lang).toBe("bn");
     expect(localStorage.getItem("portfolio-language")).toBe("bn");
@@ -104,6 +106,9 @@ describe("portfolio interactions", () => {
     ).toBeInTheDocument();
     expect(screen.getByLabelText("আপনার নাম")).toBeInTheDocument();
     expect(screen.getByText("আগস্ট ২০২১ — জুন ২০২৫")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "রেজাউল করিম — প্রথম পাতা" }),
+    ).toHaveTextContent("rk.");
     fireEvent.click(screen.getByRole("button", { name: "Switch to English" }));
     expect(document.documentElement.lang).toBe("en");
   });
@@ -157,15 +162,13 @@ describe("contact form UI", () => {
   it("retains content if activation is required", async () => {
     vi.stubGlobal(
       "fetch",
-      vi
-        .fn()
-        .mockResolvedValue({
-          ok: true,
-          json: async () => ({
-            success: false,
-            message: "Please activate your form",
-          }),
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          success: false,
+          message: "Please activate your form",
         }),
+      }),
     );
     render(<ContactForm />);
     fireEvent.change(screen.getByLabelText("Your name"), {

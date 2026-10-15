@@ -1,139 +1,201 @@
-# Rejaul Karim · Senior Mobile Engineer Portfolio
+# Rejaul Karim — Portfolio
 
-A production portfolio for Md. Rejaul Karim, presenting more than eight years of Android and cross-platform engineering experience through verified career history, selected products and measurable outcomes.
+[![Live portfolio](https://img.shields.io/badge/live-rktuhinbd.github.io%2Fportfolio-5080ef?style=for-the-badge)](https://rktuhinbd.github.io/portfolio/)
+[![Production deployment](https://img.shields.io/github/actions/workflow/status/rktuhinbd/portfolio/deploy.yml?style=for-the-badge&label=production)](https://github.com/rktuhinbd/portfolio/actions/workflows/deploy.yml)
+[![React](https://img.shields.io/badge/React-19-61dafb?style=for-the-badge&logo=react&logoColor=111)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=for-the-badge&logo=typescript&logoColor=fff)](https://www.typescriptlang.org/)
 
-The project turns a conventional résumé into an interactive product story. Its design combines a dark editorial layout with floating technology cards, glass surfaces, responsive motion and direct project evidence while keeping the experience accessible, bilingual and fast on mobile devices.
+A bilingual, production-ready portfolio for **Md. Rejaul Karim**, a Senior Mobile Engineer specializing in Android, Kotlin, Jetpack Compose, Flutter and scalable mobile architecture. The site turns verified career history into a focused product story with interactive technology cards, measurable outcomes, accessible motion and a working contact channel.
 
-**Target website:** https://rktuhinbd.github.io/portfolio/
-**Target repository:** https://github.com/rktuhinbd/portfolio
+**Live site:** [rktuhinbd.github.io/portfolio](https://rktuhinbd.github.io/portfolio/)
+
+[![Portfolio preview](public/social-preview.jpg)](https://rktuhinbd.github.io/portfolio/)
+
+## Product goals
+
+- Present engineering impact, ownership and measurable outcomes clearly.
+- Keep career history, dates, technology claims and project links aligned with the résumé.
+- Provide an equally complete English and Bengali experience without layout shifts.
+- Deliver a fast, accessible static site that is simple to maintain and publish.
+- Provide a verified contact path without exposing credentials in the browser.
 
 ## Features
 
-- English and Bengali with persistent language selection.
+- Complete English and Bengali localization with persisted language preference.
+- Stable navigation and component geometry across both languages.
 - Floating technology cards with animated, keyboard-accessible detail dialogs.
-- Career timeline with visible promotions and project outcomes.
-- Responsive project carousel, magnetic contact links and reduced-motion support.
-- Downloadable résumé, local fonts, favicon, canonical metadata and sitemap.
-- Validated contact form with honest success, error and activation states.
+- Pointer-responsive dotted field, glass hover treatment and magnetic contact links.
+- Visible 10 Minute School tenure and promotion history from August 2021 to June 2025.
+- Responsive project gallery with verified product links and mobile horizontal scrolling.
+- Downloadable résumé, local fonts, social preview, canonical metadata, sitemap and structured data.
+- Contact form with validation, spam honeypot, timeout handling and confirmed inbox delivery.
+- Reduced-motion support, skip navigation, visible focus styles and semantic landmarks.
+- Automated type checking, linting, interaction tests, production builds and GitHub Pages deployment.
 
-## Project goals
+## Architecture
 
-- Present senior-level engineering impact rather than a generic list of tools.
-- Keep career claims, dates and metrics aligned with the supplied résumé.
-- Give English and Bengali readers a complete, professionally localized experience.
-- Recreate the reference site's interaction language independently, without copying its source code or proprietary imagery.
-- Ship as a maintainable static application with repeatable checks and automated GitHub Pages delivery.
+This project uses a **content-driven, layered component architecture** built around React’s one-way data flow. It is not MVVM or formal Clean Architecture. Those patterns are valuable for larger applications with complex domain rules, data sources and long-lived presentation state; this portfolio is a static single-page interface, so a smaller architecture is clearer and easier to maintain.
+
+```mermaid
+flowchart LR
+  Content[Verified portfolio content] --> UI[React presentation components]
+  Locale[Locale provider + Bengali dictionary] --> UI
+  UI --> Build[Vite production bundle]
+  Assets[Portrait, résumé, fonts and metadata] --> Build
+  Build --> Pages[GitHub Pages]
+  UI --> Contact[Contact service]
+  Contact --> FormSubmit[FormSubmit]
+  FormSubmit --> Inbox[Owner inbox]
+```
+
+| Layer                 | Files                                    | Responsibility                                                                 |
+| --------------------- | ---------------------------------------- | ------------------------------------------------------------------------------ |
+| Presentation          | `src/App.tsx`, `src/index.css`           | Sections, responsive layout, motion and accessible interaction states          |
+| Content               | `src/content.ts`                         | Résumé-backed career history, projects, technology evidence and external links |
+| Localization          | `src/i18n.tsx`, `src/translations.bn.ts` | Locale state, persistence, document metadata and Bengali copy                  |
+| Service               | `src/contact.ts`                         | Contact validation, endpoint policy, timeout and provider response handling    |
+| Static infrastructure | `public/`, `index.html`                  | Images, résumé, local metadata, SEO and install-free public assets             |
+| Verification          | `src/test/`, GitHub Actions              | UI contracts, localization consistency, contact behavior and release checks    |
+
+This structure fits the current scope because content, UI state and external delivery concerns remain separate without adding routing, global state libraries or server infrastructure that the product does not need. See [Architecture](docs/ARCHITECTURE.md) for the full rationale and data flow.
 
 ## Technology stack
 
-| Layer        | Technology                                       | Purpose                                                                             |
-| ------------ | ------------------------------------------------ | ----------------------------------------------------------------------------------- |
-| UI           | React 19                                         | Component composition, state and accessible interaction flows                       |
-| Language     | TypeScript 5                                     | Typed content models, form contracts and safer refactoring                          |
-| Build        | Vite 7                                           | Fast development server and optimized `/portfolio/` production bundle               |
-| Motion       | Framer Motion 12, CSS and Web Animations API     | Section reveals, floating cards, glass hover effects and card-to-dialog transitions |
-| Styling      | Tailwind CSS 4 tooling and hand-authored CSS     | Responsive layout, visual tokens, Bengali typography and interaction states         |
-| Icons        | React Icons                                      | Consistent technology, navigation and social marks                                  |
-| Fonts        | Space Grotesk, JetBrains Mono, Noto Sans Bengali | Display, technical and Bengali text, bundled locally for privacy and consistency    |
-| Localization | React context and a typed translation dictionary | Persistent English/Bengali selection and document-language metadata                 |
-| Contact      | FormSubmit AJAX endpoint                         | Serverless email delivery with validation, honeypot and explicit status handling    |
-| Tests        | Vitest, Testing Library and jsdom                | UI behavior, contact states, localization consistency and accessibility contracts   |
-| Quality      | TypeScript, ESLint and Prettier                  | Static analysis and repeatable formatting                                           |
-| Delivery     | GitHub Actions and GitHub Pages                  | Locked installation, lint, tests, production build and HTTPS deployment             |
+| Area       | Technology                                       | Use                                                                 |
+| ---------- | ------------------------------------------------ | ------------------------------------------------------------------- |
+| Interface  | React 19                                         | Component composition, state and accessible interactions            |
+| Language   | TypeScript 5                                     | Typed content models and safer changes                              |
+| Build      | Vite 7                                           | Local development and optimized `/portfolio/` bundle                |
+| Motion     | Framer Motion 12, CSS, Web Animations API        | Reveals, floating cards, dialog transitions and pointer effects     |
+| Styling    | Tailwind CSS 4 tooling, authored CSS             | Responsive layout, design tokens, typography and interaction states |
+| Icons      | React Icons                                      | Technology, navigation and social symbols                           |
+| Typography | Space Grotesk, JetBrains Mono, Noto Sans Bengali | Locally bundled Latin, technical and Bengali text                   |
+| Contact    | FormSubmit AJAX endpoint                         | Serverless email delivery with explicit UI states                   |
+| Testing    | Vitest, Testing Library, jsdom                   | Interaction, localization and contact contracts                     |
+| Quality    | TypeScript, ESLint, Prettier                     | Static checks and consistent formatting                             |
+| Delivery   | GitHub Actions, GitHub Pages                     | Repeatable validation and HTTPS publishing                          |
 
-## Implementation highlights
+## Getting started
 
-- Six floating technology cards expose résumé-backed details through native dialogs. Dialogs lock background scrolling, support Escape and outside-click dismissal, contain keyboard focus, and restore focus to their trigger.
-- The opening transition is calculated from the selected card's screen position, then animates translation, rotation and scale into an upright glass panel. Reduced-motion preferences bypass optional animation.
-- Pointer-responsive dotted fields and magnetic contact links run only when useful and degrade safely on touch devices.
-- Career and project data live in `src/content.ts`, separating verified content from presentation code.
-- Bengali copy is maintained in one dictionary with consistent Bengali-script transliterations for technical terms. Tests prevent accidental English fragments in translated UI copy.
-- Contact requests use an allowlisted HTTPS endpoint, client-side validation, a hidden honeypot, a 15-second timeout, duplicate-submit protection and distinct activation, success and failure states.
-- SEO assets include canonical metadata, structured `Person` data, Open Graph imagery, a sitemap, robots instructions and portrait-based icons.
+### Prerequisites
 
-## Architecture at a glance
+- [Git](https://git-scm.com/)
+- Node.js 24; the repository includes `.nvmrc`
+- pnpm 11.25.0; the exact version is pinned in `package.json`
 
-```text
-Résumé + verified links ──> src/content.ts ──┐
-                                             ├──> React UI ──> Vite static bundle ──> GitHub Pages
-English/Bengali copy ──> localization layer ─┘          │
-                                                        └──> FormSubmit ──> Gmail inbox
-```
+### Download and install
 
-The application has no runtime server or database. GitHub Pages serves the immutable frontend, while FormSubmit handles the only external write path. See [Architecture](docs/ARCHITECTURE.md) for system boundaries and data flow.
-
-## Quick start
-
-Use Node.js 24 and pnpm 11.25.0.
+Download the repository ZIP from GitHub and extract it, or clone it:
 
 ```sh
 git clone https://github.com/rktuhinbd/portfolio.git
 cd portfolio
+corepack enable
 pnpm install --frozen-lockfile
+```
+
+Start the development server:
+
+```sh
 pnpm dev --host 127.0.0.1 --port 4173
 ```
 
-Open http://127.0.0.1:4173/portfolio/ .
+Open `http://127.0.0.1:4173/portfolio/` in a browser.
+
+### Validate a production build
 
 ```sh
-pnpm lint     # TypeScript and ESLint
-pnpm test     # Interaction, contact and translation tests
-pnpm build    # Production output in dist/
-pnpm preview  # Serve the production build locally
+pnpm check
+pnpm build
+pnpm preview --host 127.0.0.1 --port 4173
 ```
+
+The production preview is available at `http://127.0.0.1:4173/portfolio/`. Vite writes the deployable output to `dist/`; that generated folder is intentionally excluded from Git.
+
+## Commands
+
+| Command             | Purpose                                     |
+| ------------------- | ------------------------------------------- |
+| `pnpm dev`          | Start the Vite development server           |
+| `pnpm typecheck`    | Check TypeScript without emitting files     |
+| `pnpm lint`         | Run TypeScript and ESLint checks            |
+| `pnpm test`         | Run the interaction and service test suite  |
+| `pnpm format:check` | Verify repository formatting                |
+| `pnpm check`        | Run lint, tests and formatting checks       |
+| `pnpm build`        | Type-check and create the production bundle |
+| `pnpm preview`      | Serve the built bundle locally              |
 
 ## Project structure
 
 ```text
 portfolio/
 ├── .github/workflows/
-│   ├── preview.yml          # Checks and downloadable preview artifact
-│   └── deploy.yml           # Manual production Pages deployment
+│   ├── deploy.yml              # Approved production deployment
+│   └── preview.yml             # Branch and pull-request validation
 ├── docs/
-│   ├── ARCHITECTURE.md      # System boundaries and data flow
-│   ├── DEPLOYMENT.md        # Publish, verify and rollback
-│   ├── FILE-TREE.md         # Complete maintained source-tree guide
-│   ├── VERIFICATION.md      # Production and contact-delivery evidence
-│   ├── REFERENCE-INVENTORY.md
-│   ├── PROJECT-PLAN.md
-│   └── design-qa.md
+│   ├── ARCHITECTURE.md         # Architectural decisions and data flow
+│   ├── DEPLOYMENT.md           # Publishing and rollback guide
+│   ├── FILE-TREE.md            # Maintained source inventory
+│   └── VERIFICATION.md         # Release and delivery evidence
 ├── public/
-│   ├── assets/             # Supplied portrait and optimized image
-│   ├── resume.pdf
+│   ├── assets/                 # Supplied and optimized portrait
+│   ├── resume.pdf              # Downloadable résumé
 │   ├── favicon.png
 │   ├── apple-touch-icon.png
 │   ├── social-preview.jpg
 │   ├── robots.txt
 │   └── sitemap.xml
 ├── src/
-│   ├── App.tsx
-│   ├── content.ts
-│   ├── contact.ts
-│   ├── i18n.tsx
-│   ├── translations.bn.ts
-│   ├── index.css
-│   ├── main.tsx
-│   └── test/               # UI, contact and localization coverage
-├── .env.example
-├── index.html
-├── package.json
-├── pnpm-lock.yaml
+│   ├── test/                   # UI, contact and localization tests
+│   ├── App.tsx                 # Page sections and interaction components
+│   ├── contact.ts              # Contact service and validation
+│   ├── content.ts              # Career, project and technology data
+│   ├── i18n.tsx                # Locale provider and persistence
+│   ├── translations.bn.ts      # Bengali localization dictionary
+│   ├── index.css               # Design system and responsive rules
+│   └── main.tsx                # Application entry point
+├── .env.example                # Optional public contact endpoint override
+├── .nvmrc                      # Node.js version
+├── .prettierignore             # Generated and lockfile formatting exclusions
+├── index.html                  # HTML shell and search metadata
+├── package.json                # Scripts and dependencies
+├── pnpm-lock.yaml              # Reproducible dependency graph
 ├── tsconfig.json
-├── eslint.config.js
 ├── vite.config.js
 └── vitest.config.ts
 ```
 
-Read [Architecture](docs/ARCHITECTURE.md), [File tree](docs/FILE-TREE.md), [Deployment](docs/DEPLOYMENT.md), [Verification](docs/VERIFICATION.md) and [QA findings](docs/design-qa.md).
+The complete annotated inventory is in [File tree](docs/FILE-TREE.md).
 
-## Content maintenance
+## Content and localization
 
-Edit career and project information in `src/content.ts`, Bengali copy in `src/translations.bn.ts`, and replace `public/resume.pdf` when updating the résumé. Keep dates and metrics consistent. Preserve actual link destinations when translating labels. Run the checks above and inspect both languages on mobile and desktop.
+- Update career history, projects, technology evidence and URLs in `src/content.ts`.
+- Update Bengali interface copy in `src/translations.bn.ts`.
+- Replace `public/resume.pdf` and verify that the website dates and metrics still match it.
+- Replace both portrait formats together when updating the photograph.
+- Preserve product names, email addresses and destination URLs when localizing labels.
+- Check English and Bengali at desktop and mobile breakpoints after changing visible copy.
 
-## Contact configuration
+## Contact delivery
 
-Default delivery uses FormSubmit for `rejaul.karim.pro@gmail.com`, the portfolio contact address. The GitHub account email is separate and does not change this recipient. FormSubmit activation and live inbox delivery were verified from the published site on 15 October 2026. See [Verification](docs/VERIFICATION.md) and the [FormSubmit documentation](https://formsubmit.co/documentation). An optional public Formspree endpoint can be configured through `.env.example`; never commit secrets.
+The default contact path posts directly from the browser to FormSubmit for `rejaul.karim.pro@gmail.com`. Recipient activation and live Gmail delivery from the published domain were verified on 15 October 2026. The UI distinguishes sending, activation-pending, success, validation, timeout and provider-error states while retaining the message on failure.
 
-## Design and assets
+`VITE_FORMSPREE_ENDPOINT` may optionally replace the public endpoint. It is an endpoint URL, not a secret. Never commit mail credentials, private tokens or an unrestricted API key to a Vite application. See [Verification](docs/VERIFICATION.md) for the current evidence.
 
-The visual direction is inspired by Francisco Pacheco's portfolio and implemented independently. The portrait and résumé were supplied by the owner. Project visuals use original metric panels; proprietary reference imagery and code are not included. Third-party dependencies retain their respective licenses. No blanket reuse license is granted for personal photographs or résumé content.
+## Deployment and maintenance
+
+GitHub Pages serves the static production bundle from the project path `/portfolio/`. The production workflow is manual and only deploys `main`; branch and pull-request workflows validate the same locked dependency graph and upload a preview artifact.
+
+Before publishing a content or dependency update:
+
+1. Run `pnpm check` and `pnpm build`.
+2. Inspect English and Bengali on desktop and mobile.
+3. Verify navigation, technology dialogs, résumé links and the contact form.
+4. Push the reviewed commit to `main`.
+5. Run **Approved production deployment** in GitHub Actions and verify the live URL.
+
+Detailed publishing and rollback instructions are in [Deployment](docs/DEPLOYMENT.md).
+
+## Assets and ownership
+
+The portrait, résumé content, personal identity and career information belong to Md. Rejaul Karim. Interface graphics and metric panels are project-specific assets. Libraries and fonts retain their respective licenses. No permission to reuse personal photographs, résumé content or identity is granted by the presence of this public repository.

@@ -215,9 +215,13 @@ footer {
   backdrop-filter: blur(20px);
 }
 .brand {
+  flex: 0 0 34px;
+  width: 34px;
+  font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   letter-spacing: -0.07em;
   font-size: 32px;
+  line-height: 48px;
 }
 .brand span {
   color: var(--blue);
@@ -225,6 +229,9 @@ footer {
 .nav {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 492px;
+  height: 56px;
   padding: 7px;
   border: 1px solid #25262c;
   border-radius: 60px;
@@ -232,9 +239,15 @@ footer {
   gap: 3px;
 }
 .nav a {
+  display: grid;
+  place-items: center;
+  flex: 1 1 0;
+  height: 40px;
   font-size: 13px;
   color: #a2a6af;
-  padding: 10px 18px;
+  padding: 10px 8px;
+  text-align: center;
+  white-space: nowrap;
   position: relative;
   transition: color 0.3s;
 }
@@ -254,9 +267,15 @@ footer {
 .header-actions {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  flex: 0 0 218px;
+  width: 218px;
   gap: 14px;
 }
 .header-cta {
+  flex: 0 0 121px;
+  width: 121px;
+  height: 46px;
   padding: 12px 18px;
   font-size: 13px;
 }
@@ -1296,8 +1315,11 @@ footer a {
     padding: 0 24px;
   }
   .nav a {
-    padding: 10px 11px;
+    padding: 10px 6px;
     font-size: 12px;
+  }
+  .nav {
+    width: 440px;
   }
   .header-actions {
     gap: 9px;
@@ -1365,7 +1387,10 @@ footer a {
     padding: 0 20px;
   }
   .brand {
+    flex-basis: 29px;
+    width: 29px;
     font-size: 27px;
+    line-height: 42px;
   }
   .nav {
     display: none;
@@ -1375,6 +1400,8 @@ footer a {
     top: 78px;
     border-radius: 20px;
     padding: 12px;
+    width: auto;
+    height: auto;
     background: #10141cf5;
     backdrop-filter: blur(20px);
   }
@@ -1382,6 +1409,8 @@ footer a {
     display: grid;
   }
   .nav a {
+    display: block;
+    height: auto;
     font-size: 16px;
     padding: 13px 18px;
   }
@@ -1395,9 +1424,14 @@ footer a {
     font-size: 18px;
   }
   .header-actions {
+    flex: 0 0 auto;
+    width: auto;
     gap: 9px;
   }
   .header-cta {
+    flex-basis: 104px;
+    width: 104px;
+    height: 40px;
     font-size: 12px;
     padding: 10px 14px;
   }
@@ -1782,7 +1816,7 @@ html[data-motion="off"] *:after {
 html[data-motion="off"] .glass {
   transform: none !important;
 }
-/* Language, career progression and reference-grounded magnetic interactions. */
+/* Language, career progression and magnetic interactions. */
 .language-toggle {
   display: flex;
   gap: 7px;
@@ -1791,6 +1825,10 @@ html[data-motion="off"] .glass {
   border-radius: 100px;
   background: transparent;
   padding: 10px 12px;
+  flex: 0 0 83px;
+  width: 83px;
+  height: 39px;
+  justify-content: center;
   font-size: 11px;
   color: #777f90;
   white-space: nowrap;
@@ -1946,27 +1984,24 @@ html[lang="bn"] h2,
 html[lang="bn"] h3,
 html[lang="bn"] h4 {
   letter-spacing: -0.015em;
-  line-height: 1.25;
-}
-html[lang="bn"] p {
-  line-height: 1.95;
 }
 html[lang="bn"] .hero h1 {
-  font-size: 86px;
-  line-height: 1.2;
+  font-size: clamp(80px, 6.4vw, 112px);
+  line-height: 0.92;
 }
 html[lang="bn"] .hero-eyebrow {
   letter-spacing: 0;
 }
 html[lang="bn"] .section h2 {
-  font-size: clamp(40px, 4.5vw, 65px);
+  font-size: clamp(44px, 5.65vw, 82px);
+  line-height: 1.02;
 }
 html[lang="bn"] .contact h2 {
-  font-size: clamp(54px, 8.7vw, 125px);
+  font-size: clamp(65px, 12vw, 174px);
 }
 html[lang="bn"] .nav a {
-  font-size: 12px;
-  padding: 10px 14px;
+  font-size: 13px;
+  padding: 10px 6px;
 }
 html[lang="bn"] .tech-phone h3 {
   font-family: "Space Grotesk", "Noto Sans Bengali", sans-serif;
@@ -1992,9 +2027,6 @@ html[lang="bn"] .section-label small {
 html[lang="bn"] .profile-stats strong {
   font-family: "Space Grotesk", sans-serif;
 }
-html[lang="bn"] .button {
-  font-size: 13px;
-}
 html[lang="bn"] .dialog-content h2 {
   font-size: 36px;
 }
@@ -2013,6 +2045,9 @@ html[lang="bn"] .dialog-content h2 {
     font-size: 10px;
     padding: 8px 10px;
     gap: 5px;
+    flex-basis: 75px;
+    width: 75px;
+    height: 36px;
   }
   .hero-social {
     gap: 8px;
@@ -2026,16 +2061,13 @@ html[lang="bn"] .dialog-content h2 {
     margin: 0 2px;
   }
   html[lang="bn"] .hero h1 {
-    font-size: 59px;
-  }
-  html[lang="bn"] .hero {
-    padding-top: 125px;
+    font-size: 60px;
   }
   html[lang="bn"] .section h2 {
-    font-size: 38px;
+    font-size: 42px;
   }
   html[lang="bn"] .contact h2 {
-    font-size: 56px;
+    font-size: 58px;
   }
   .progression-step {
     padding-left: 18px;
@@ -2043,6 +2075,17 @@ html[lang="bn"] .dialog-content h2 {
   html[lang="bn"] .nav a {
     font-size: 16px;
     padding: 13px 18px;
+  }
+}
+@media (max-width: 480px) {
+  html[lang="bn"] .hero h1 {
+    font-size: 56px;
+  }
+  html[lang="bn"] .section h2 {
+    font-size: 39px;
+  }
+  html[lang="bn"] .contact h2 {
+    font-size: 58px;
   }
 }
 @media (max-width: 380px) {
@@ -2074,6 +2117,6 @@ html[lang="bn"] .dialog-content h2 {
     padding: 14px 9px;
   }
   html[lang="bn"] .contact h2 {
-    font-size: 46px;
+    font-size: 58px;
   }
 }

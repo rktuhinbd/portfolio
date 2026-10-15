@@ -1,8 +1,11 @@
 # Deployment
 
-## Target
+## Production
 
-Create one fresh public repository, `rktuhinbd/portfolio`. Upload the contents of the `portfolio` folder at the repository root, not inside another nested folder. The intended Pages URL is https://rktuhinbd.github.io/portfolio/ .
+- Repository: https://github.com/rktuhinbd/portfolio
+- Website: https://rktuhinbd.github.io/portfolio/
+- Branch: `main`
+- Runtime: static GitHub Pages project site
 
 ## Publish
 

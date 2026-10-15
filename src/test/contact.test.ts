@@ -36,15 +36,13 @@ describe("contact delivery", () => {
     expect(fetcher).not.toHaveBeenCalled();
   });
   it("posts to the intended recipient and distinguishes submission from inbox delivery", async () => {
-    const fetcher = vi
-      .fn()
-      .mockResolvedValue({
-        ok: true,
-        json: async () => ({
-          success: "true",
-          message: "The form was submitted successfully.",
-        }),
-      });
+    const fetcher = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        success: "true",
+        message: "The form was submitted successfully.",
+      }),
+    });
     await expect(sendContact(CONTACT_ENDPOINT, fields, fetcher)).resolves.toBe(
       "submitted",
     );
@@ -67,16 +65,13 @@ describe("contact delivery", () => {
       sendContact(
         CONTACT_ENDPOINT,
         fields,
-        vi
-          .fn()
-          .mockResolvedValue({
-            ok: true,
-            json: async () => ({
-              success: false,
-              message:
-                "Please activate your form using the email confirmation.",
-            }),
+        vi.fn().mockResolvedValue({
+          ok: true,
+          json: async () => ({
+            success: false,
+            message: "Please activate your form using the email confirmation.",
           }),
+        }),
       ),
     ).resolves.toBe("activation-required");
   });

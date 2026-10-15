@@ -30,3 +30,13 @@ The verification message identified itself as a live portfolio contact-form test
 - Vitest: 26 tests across three files passed.
 - Vite production build: passed.
 - Git diff whitespace validation: passed before the release.
+
+## Localization layout verification
+
+Rechecked on 15 October 2026 at 1440×900 and 390×844.
+
+- `rk.` remains unchanged in both languages.
+- Desktop header geometry is identical in English and Bengali: 94px header, 492×56px navigation, 218×46px action group and 83×39px locale control.
+- The desktop hero heading is 357×170px in both languages at the checked viewport.
+- Mobile header, brand, controls, hero heading and primary action row retain the same dimensions and positions in both languages.
+- English and Bengali screenshots were visually inspected after motion settled; no clipped navigation or horizontal overflow was observed.

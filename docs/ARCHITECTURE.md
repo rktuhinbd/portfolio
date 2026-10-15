@@ -1,48 +1,63 @@
 # Architecture
 
-## System overview
+## Decision
 
-A static React application served by GitHub Pages at `/portfolio/`. Vite compiles TypeScript and CSS into `dist/`. There is no application server or database; contact delivery is delegated to FormSubmit.
+The portfolio uses a **content-driven, layered React component architecture** with one-way data flow. It deliberately avoids MVVM and formal Clean Architecture because it has one page, a small amount of local UI state, no database and no complex domain layer.
+
+The design follows the React model: data is stored separately, presentation is composed from components, state lives near the interactions that own it, and shared locale state is provided through context. This keeps the code direct while preserving clear boundaries.
+
+## System view
 
 ```mermaid
 flowchart LR
   Visitor[Browser] --> Pages[GitHub Pages]
-  Pages --> React[React application]
-  Content[content.ts] --> React
-  Locale[i18n.tsx + translations.bn.ts] --> React
-  React --> Assets[Portrait, fonts and résumé]
-  React --> Contact[contact.ts]
-  Contact --> FormSubmit[FormSubmit]
-  FormSubmit --> Inbox[Owner email after activation]
+  Pages --> App[React application]
+  Content[content.ts] --> App
+  Locale[i18n.tsx + translations.bn.ts] --> App
+  Assets[Public assets] --> App
+  App --> Contact[contact.ts]
+  Contact --> Provider[FormSubmit]
+  Provider --> Inbox[Owner inbox]
 ```
 
-## Responsibilities
+## Layers and boundaries
 
-| Module                   | Responsibility                                                      |
-| ------------------------ | ------------------------------------------------------------------- |
-| `src/main.tsx`           | Application bootstrap and font/style imports                        |
-| `src/App.tsx`            | Sections, navigation, technology dialogs, motion and contact form   |
-| `src/content.ts`         | Career history, project links and technology evidence               |
-| `src/i18n.tsx`           | Language context, persistence and document language                 |
-| `src/translations.bn.ts` | Bengali copy and technical transliterations                         |
-| `src/contact.ts`         | Endpoint allowlist, validation, timeout and response classification |
-| `src/index.css`          | Responsive layout, visual tokens, focus and motion treatments       |
-| `public/`                | Static downloadable assets and search metadata                      |
+| Layer                 | Modules                          | Responsibility                                                        |
+| --------------------- | -------------------------------- | --------------------------------------------------------------------- |
+| Bootstrap             | `main.tsx`                       | Mount React and load fonts/styles                                     |
+| Presentation          | `App.tsx`, `index.css`           | Sections, semantic markup, responsive layout and motion               |
+| Content               | `content.ts`                     | Verified career, project and technology data                          |
+| Localization          | `i18n.tsx`, `translations.bn.ts` | Language state, persistence, metadata and translations                |
+| Service               | `contact.ts`                     | Validation, allowlisted endpoint, timeout and response classification |
+| Static infrastructure | `public/`, `index.html`          | Résumé, portrait, icons and search/social metadata                    |
+| Verification          | `src/test/`, workflows           | Behavior contracts and production gates                               |
 
-## Interaction model
+## State and interaction model
 
-Section anchors provide navigation without a router. Native dialogs lock background scrolling, contain focus, support Escape and restore focus to the invoking card. Animation uses Framer Motion, CSS and the Web Animations API. System reduced-motion preferences disable optional motion. Pointer-reactive effects are adapted for touch screens.
+React state is local to the feature that owns it: active navigation section, mobile menu, selected technology, contact status, copied-email feedback and language. Locale is the only cross-page concern, so it uses a small context provider and local storage. There is no global store because the interface has no shared server cache or complex state graph.
 
-Language selection is stored locally. English source copy maps to Bengali translations; technical names are transliterated consistently. Actual URLs and email addresses remain unchanged.
+Section anchors provide navigation without a router. Native dialogs lock background scrolling, contain keyboard focus, support Escape/outside-click dismissal and restore focus to the selected technology card. Motion uses Framer Motion, CSS and the Web Animations API; reduced-motion preferences disable optional movement.
+
+## Localization strategy
+
+English source strings map to one Bengali dictionary. The locale provider updates the document language, title and stored preference. Brand text, addresses and destination URLs remain invariant. Fixed component geometry and shared type scales prevent the header and major controls from moving when the locale changes.
 
 ## Contact data flow
 
-Name, reply email and message are validated before submission. A hidden honeypot discourages basic spam. Requests have a timeout; pending activation and errors preserve entered text. Provider acceptance is not proof of inbox receipt. Recipient activation and live delivery to Gmail were verified on 15 October 2026; repeat this check after changing the domain, endpoint or recipient.
+The form validates name, reply email and message before posting. A honeypot discourages basic spam, duplicate submissions are blocked, and requests have a timeout. Provider acceptance, activation-pending and delivery failures have distinct UI states. Contact credentials never enter the frontend.
 
-No API secret belongs in the frontend. `VITE_FORMSPREE_ENDPOINT` is an optional public endpoint override, not a credential. No custom dashboard is necessary for the current email-only requirement.
+FormSubmit recipient activation and a complete live delivery to Gmail were verified on 15 October 2026. Repeat the live check after changing the recipient, endpoint or production domain.
 
-## Delivery and maintenance
+## Why this architecture fits
 
-The preview workflow installs the locked dependencies, checks types/lint, runs tests and builds an artifact. The production workflow deploys the main branch through GitHub Pages when manually triggered. Production assets use `/portfolio/`; changing the repository name requires updating the Vite base, canonical URL, sitemap, robots and contact source URL together.
+- It separates volatile résumé content from rendering and delivery logic.
+- It follows React’s component hierarchy and one-way data flow.
+- It keeps the static bundle compatible with GitHub Pages.
+- It is straightforward to test because the contact service and localization functions are isolated.
+- It avoids infrastructure and abstraction that would add maintenance cost without improving this product.
 
-Keep résumé claims in `content.ts` aligned with `public/resume.pdf`. Add translations and tests when adding copy or interactions. Validate desktop/mobile layouts after content changes. The implementation intentionally uses independent visuals instead of the reference author's assets.
+If the portfolio later adds authenticated editing, a CMS, multiple routed case-study pages or substantial server data, feature folders and a server-facing data layer would become appropriate. For the current scope, the existing layers are sufficient.
+
+## Delivery
+
+Vite compiles the site to `dist/` with the required `/portfolio/` base. GitHub Actions installs the locked dependencies, checks types and lint, runs tests, builds the bundle and deploys it to GitHub Pages. Production deployment is manual and limited to `main`.

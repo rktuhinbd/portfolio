@@ -11,7 +11,7 @@ Create one fresh public repository, `rktuhinbd/portfolio`. Upload the contents o
 3. Run the **Approved production deployment** workflow on `main`.
 4. Wait for both build and deploy jobs to succeed.
 5. Open the deployment URL and verify CSS/images, both languages, navigation, skill dialogs and résumé download.
-6. Activate the contact recipient and verify a real message reaches the inbox. Do not interpret a build success as email delivery verification.
+6. Recheck the contact flow after endpoint, domain or recipient changes. The current FormSubmit recipient was activated and live inbox delivery was verified on 15 October 2026.
 
 The production workflow is manual to avoid accidental publishing. Preview checks run on pull requests and non-main branches and upload a downloadable build artifact; they do not create an independently hosted preview URL.
 

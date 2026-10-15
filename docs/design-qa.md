@@ -1,9 +1,11 @@
 # Portfolio QA — 15 October 2026
 
 ## Result
-Preview implementation checks passed. Production release remains blocked by recipient email activation/live delivery verification and user deployment approval. This is not a claim of 100% reference equivalence.
+
+Preview implementation checks passed. Production deployment, recipient activation and live inbox delivery were verified on 15 October 2026. This is not a claim of 100% reference equivalence.
 
 ## Evidence and checks
+
 - Reference/implementation hero comparison captured at 1440×900 and reviewed side by side. The black/cobalt palette, Space Grotesk display hierarchy, navigation pill, diagonal card collage and rounded controls are preserved. Personal name length changes text width; the independent cards intentionally replace proprietary imagery.
 - Bengali uses locally hosted Noto Sans Bengali, adjusted line height, professional wording and consistent transliteration for technical terms. All translated dictionary values are tested for accidental Latin text. A browser audit of the complete rendered page found only the English language option and functional email address remaining in Latin script.
 - Terminology research: Microsoft Bengali usage supports familiar loanwords such as সফটওয়্যার, অ্যাপ্লিকেশন and ডেভেলপার: https://www.microsoft.com/bn-bd/servicesagreement and https://developer.microsoft.com/bn-in/microsoft-edge/ . These sources inform terminology; they are not a certification of translation quality.
@@ -13,11 +15,12 @@ Preview implementation checks passed. Production release remains blocked by reci
 - Full 10 Minute School tenure is August 2021–June 2025. Both roles and May 2023 promotion are visible without disclosure.
 - Medium now uses the three-oval mark, the same inherited color, size, container and hover treatment as neighboring social controls. Destination is https://medium.com/@rktuhinbd .
 - Magnetic email/social controls independently match sampled reference movement factors (0.30/0.35) and easing; exact timing across all devices is unverified.
-- Contact submit button is enabled. Tests cover validation, endpoint restriction, honeypot, success, pending activation, failure and preserving text. No real message has been sent; inbox delivery must not be assumed.
+- Contact submit button is enabled. Tests cover validation, endpoint restriction, honeypot, success, pending activation, failure and preserving text. FormSubmit activation, the website success state and Gmail inbox delivery were verified from the published site.
 - Final automated validation: lint/typecheck passed; 26 tests across 3 files passed; production build passed; git diff whitespace check passed.
 
 ## Remaining limitations
+
 - Original project metric panels and skill cards replace reference artwork. No proprietary code or images were copied. Exact particle physics and every timing state are not verified.
 - Repocket Play link is from the supplied résumé; live retrieval could not be verified. Other selected public app links were verified during source research.
-- GitHub Actions files are prepared, but no remote run, push, merge or deployment has occurred. Preview workflow supplies a downloadable build artifact, not a hosted URL.
-- Email setup test was rejected by automatic approval review because it transmits the recipient email/site details through FormSubmit without specific approval for that test. Await explicit approval, then recipient activation and inbox verification.
+- The production GitHub Actions build and Pages deployment completed successfully. The separate preview workflow supplies a downloadable build artifact, not an independently hosted preview URL.
+- Contact delivery is provider-dependent. Recheck activation and inbox delivery after changing the public domain, endpoint or recipient.

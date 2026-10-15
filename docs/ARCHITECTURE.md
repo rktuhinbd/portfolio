@@ -18,16 +18,16 @@ flowchart LR
 
 ## Responsibilities
 
-| Module | Responsibility |
-| --- | --- |
-| `src/main.tsx` | Application bootstrap and font/style imports |
-| `src/App.tsx` | Sections, navigation, technology dialogs, motion and contact form |
-| `src/content.ts` | Career history, project links and technology evidence |
-| `src/i18n.tsx` | Language context, persistence and document language |
-| `src/translations.bn.ts` | Bengali copy and technical transliterations |
-| `src/contact.ts` | Endpoint allowlist, validation, timeout and response classification |
-| `src/index.css` | Responsive layout, visual tokens, focus and motion treatments |
-| `public/` | Static downloadable assets and search metadata |
+| Module                   | Responsibility                                                      |
+| ------------------------ | ------------------------------------------------------------------- |
+| `src/main.tsx`           | Application bootstrap and font/style imports                        |
+| `src/App.tsx`            | Sections, navigation, technology dialogs, motion and contact form   |
+| `src/content.ts`         | Career history, project links and technology evidence               |
+| `src/i18n.tsx`           | Language context, persistence and document language                 |
+| `src/translations.bn.ts` | Bengali copy and technical transliterations                         |
+| `src/contact.ts`         | Endpoint allowlist, validation, timeout and response classification |
+| `src/index.css`          | Responsive layout, visual tokens, focus and motion treatments       |
+| `public/`                | Static downloadable assets and search metadata                      |
 
 ## Interaction model
 
@@ -37,7 +37,7 @@ Language selection is stored locally. English source copy maps to Bengali transl
 
 ## Contact data flow
 
-Name, reply email and message are validated before submission. A hidden honeypot discourages basic spam. Requests have a timeout; pending activation and errors preserve entered text. Provider acceptance is not proof of inbox receipt. Recipient activation and a live delivery test are required before treating delivery as verified.
+Name, reply email and message are validated before submission. A hidden honeypot discourages basic spam. Requests have a timeout; pending activation and errors preserve entered text. Provider acceptance is not proof of inbox receipt. Recipient activation and live delivery to Gmail were verified on 15 October 2026; repeat this check after changing the domain, endpoint or recipient.
 
 No API secret belongs in the frontend. `VITE_FORMSPREE_ENDPOINT` is an optional public endpoint override, not a credential. No custom dashboard is necessary for the current email-only requirement.
 
